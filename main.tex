@@ -1,0 +1,279 @@
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage[inline]{enumitem}
+\usepackage{amsmath,amssymb,latexsym,amsfonts, amsthm}
+\usepackage[fontsize=13pt]{scrextend} % Font size
+% \usepackage{verbatim} % coding
+\usepackage{mathtools}
+
+
+\usepackage[tracking]{microtype} % Font
+\usepackage[sc,osf]{mathpazo} % Font
+\usepackage{graphicx}
+\usepackage{lipsum}
+
+% \usepackage[all]{xy} % diagram
+
+% \usepackage{tikz} % diagram
+% \usepackage{tikz-cd} % diagram
+
+% \usetikzlibrary{arrows}
+% \usetikzlibrary{matrix}
+
+
+\makeatletter
+\renewenvironment{cases}[1][l]{\matrix@check\cases\env@cases{#1}}{\endarray\right.}
+\def\env@cases#1{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrace\def\arraystretch{1.2}%
+  \array{@{}#1@{\quad}l@{}}}
+\makeatother
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{2016-11988} % Top left header
+\chead{3341.202 Introduction to Mathematical Analysis} % Top center header
+\rhead{Lee Young Jae} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\newtheorem{lemma}{Lemma}
+
+
+\setcounter{secnumdepth}{0}
+
+
+\begin{document}
+\begin{titlepage}
+\centering
+{\scshape\LARGE Seoul National University \par}
+\vspace{1.5cm}
+{\huge\bfseries Introduction to\\Mathematical Analysis 2\par}
+\vspace{1cm}
+{\scshape\Large Assignment \# 3\par}
+
+\vspace{1cm}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=80mm]{lion.jpg}
+\end{figure}
+
+\vspace{1cm}
+
+\arrayrulewidth=1.2pt
+\begin{tabular}{p{2.5cm}p{2cm}}
+\centering
+& \\
+\cline{2-2}
+\vspace{-.73cm}
+My Score? & \\
+\end{tabular}
+
+
+
+\vfill
+\text{2016-11988}
+\vspace{.7cm}\par
+\textsc{\large Lee Young Jae}
+\vspace{.7cm}\par
+{\Large \today\par}
+\end{titlepage}
+
+\setlength{\parindent}{0cm}
+
+
+\begin{enumerate}[font = \Large\bfseries\itshape\space, leftmargin = 3mm, labelsep = 3mm]
+\item
+Show that for $|x| \leq 1$,
+$$\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots = \sum_{n\geq 0}(-1)^n \frac{x^{2n+1}}{2n+1}.$$
+\begin{proof}
+\begin{lemma}
+If $|x| < 1$ then $\frac{1}{1+x} = \sum_{n\geq 0} (-1)^n x^{n}$.
+\end{lemma}
+
+\begin{lemma}
+$\arctan x = \int_0^x \frac{1}{1+t^2}dt$.
+\begin{proof}
+Let $x = \tan s$. Then,
+$\frac{d}{dx} \arctan x = \frac{d}{dx} \tan^{-1}(x) = \frac{1}{\sec^2s} = \frac{1}{1+\tan^2 s} = \frac{1}{1+x^2}$, and $\arctan 0 = 0$.
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+If $f' = \sum_{n\geq 0}^\infty a_nx^n$ in $|x| < 1$ and $f(0) = 0$, then $f = \sum_{n\geq 0}^\infty \frac{a_n}{n+1}x^{n+1}$ in $|x| < 1$.
+\begin{proof}
+Since converging in $[a,b] \subset (-1,1)$ is uniform, by theorem 5.3.1 $\int_0^x f_n(t) dt \rightarrow \int_0^x f(t)dt$, where $f_n \leftarrow \sum_{k=1}^n a_nx^n$ and $f \leftarrow f'$.
+\end{proof}
+\end{lemma}
+
+\begin{lemma}[Abel's theorem]
+If $f = \sum_{n\geq 0} a_nx^n$ and $\sum_{n\geq 0} a_n <\infty$, radius of convergence = $1$, then $\lim_{x\rightarrow 1-}f(x) = \sum_{n\geq 0} a_n$.
+\end{lemma}
+
+By lemma 1, $\frac{1}{1+x^2} = \sum_{n\geq 0} (-1)^n x^{2n}$.\\
+By lemma 2 and lemma 3, $\arctan x = \sum_{n\geq 0} (-1)^n \frac{1}{2n+1} x^{2n+1}$ for $|x| < 1$.\\
+By lemma 4, $\arctan x = \sum_{n\geq 0} (-1)^n \frac{x^{2n+1}}{2n+1}$ for $|x| = 1$.\\
+Therefore, $\arctan x = \sum_{n\geq 0} (-1)^n \frac{x^{2n+1}}{2n+1}$ for $|x| \leq 1$.
+\end{proof}
+
+
+\item
+For $x \in \mathbb{R}, n \in \mathbb{N}$ let
+$$A_k^{(n)} := \exp \left(i\cdot \frac{k}{n} \cdot x\right) \quad k = 0,1,\cdots,n,$$
+and
+$$L_n := \sum_{k=1}^n |A_k^{(n)} - A_{k-1}^{(n)}|.$$
+Then show:
+$$L_n = 2n \cdot |\sin\frac{x}{2n}| \quad \text{and} \quad 2n\cdot \sin\frac{x}{2n} \xrightarrow[n\rightarrow\infty]{} x.$$
+\begin{proof}
+\begin{lemma}
+$\lim_{x\rightarrow 0}\frac{\sin x}{x} = 1$.
+\begin{proof}
+By drawing the triangle, $x\cos x \leq \sin x \leq x$
+Hence, $x \leq \frac{\sin x}{x} \leq 1$ and $\lim_{x\rightarrow 0} \frac{\sin x}{x} = 1$.
+\end{proof}
+\end{lemma}
+$$
+\begin{aligned}
+\left|A^{(n)}_k - A^{(n)}_{k-1}\right|
+&= \left|\left(\cos \frac{k}{n}x + i\sin \frac{k}{n}x\right) - \left(\cos \frac{k-1}{n}x + i\sin \frac{k-1}{n}x\right)\right|\\
+&= \left|\left(\cos \frac{k}{n}x - \cos \frac{k-1}{n}x\right) + i \left(\sin \frac{k}{n}x - \sin \frac{k-1}{n}x\right)\right|\\
+&= \left|-2\sin\frac{2k-1}{2n}x\sin\frac{1}{2n}x + 2i\cos\frac{2k-1}{2n}x \sin\frac{1}{2n}x\right|\\
+&= 2 \cdot \left|\sin \frac{x}{2n}\right|.
+\end{aligned}
+$$
+Therefore, $L_n = 2n \cdot |\sin \frac{x}{2n}|$, and $\lim_{n\rightarrow \infty} L_n = x$ by lemma 5.
+\end{proof}
+
+\item
+Show that
+$$\int_0^{2\pi} \cos(kx)\sin(lx)dx = 0, \quad \forall k,l \in \mathbb{N} \cup \{0\},$$
+$$\int_0^{2\pi} \cos(kx)\cos(lx)dx = \int_0^{2\pi} \sin(kx)\sin(lx)dx = 0, \quad \text{for } k \neq l,$$
+$$\int_0^{2\pi} \cos^2(kx)dx = \int_0^{2\pi} \sin^2(kx)dx = \pi, \quad \forall k \geq 1.$$
+\begin{proof}
+\begin{enumerate}
+\item
+$\int_0^{2\pi} \cos(kx)\sin(lx)dx
+= \int_0^{2\pi} \frac{1}{2} \left( \sin(k+l)x - \sin(k-l)x\right)dx
+= 0.$
+
+\item
+$\int_0^{2\pi} \cos(kx)\cos(lx)dx
+= \int_0^{2\pi} \frac{1}{2}\left(\cos(k+l)x + \cos(k-l)x\right)dx
+= 0$, and\\
+$\int_0^{2\pi} \sin(kx)\sin(lx)dx
+= \int_0^{2\pi} \frac{1}{2}\left(-\cos(k+l)x + \cos(k-l)x\right)dx
+= 0$.
+
+\item
+$\int_0^{2\pi} \cos^2(kx)dx = \int_0^{2\pi} \frac{1 + \cos 2kx}{2}dx = \pi$, and\\
+$\int_0^{2\pi} \sin^2(kx)dx = \int_0^{2\pi} \frac{1 - \cos 2kx}{2}dx = \pi$.
+\end{enumerate}
+\end{proof}
+
+\item
+Let $f \in R([0,2\pi]), x_k^n := \frac{k2\pi}{n}, k = 0,\cdots,n \in \mathbb{N} \cup \{0\}$.
+Show that
+$$f_n(t) := \frac{f(x_k^n) - f(x_{k-1}^n)}{x_k^n - x_{k-1}^n}(t-x_{k-1}^n) + f(x_{k-1}^n), \quad t \in [x_{k-1}^n, x_k^n], k = 1,\cdots,n \in \mathbb{N} \cup \{0\}$$
+converges in the mean square on $[0,2\pi]$ to $f$.
+\begin{proof}
+
+
+\begin{lemma}
+Let $g$ be a bounded function on the interval $I$, and let $|g| < M$.
+Then, $\sup_{x \in I} g^2(x) - \inf_{x \in I} g^2(x) \leq 2M \left( \sup_{x\in I} g(x) - \inf_{x\in I} g(x)\right)$.
+\begin{proof}
+Note that
+$$
+\sup_{x\in I}g^2(x) =
+\begin{cases}
+\left(\sup_{x \in I} g(x)\right)^2 & \text{if } \inf_{x\in I} g(x) > 0\\
+\left(\inf_{x \in I} g(x)\right)^2 & \text{if } \sup_{x\in I} g(x) < 0\\
+\left(\max(\sup_{x\in I}g(x), -\inf_{x\in I}g(x))\right)^2 & \text{if } \inf_{x\in I} g(x) < 0 < \sup_{x \in I} g(x),\\
+\end{cases}
+$$
+and
+$$
+\inf_{x\in I}g^2(x) \leq
+\begin{cases}
+\left(\inf_{x \in I} g(x)\right)^2 & \text{if } \inf_{x\in I} g(x) > 0\\
+\left(\sup_{x \in I} g(x)\right)^2 & \text{if } \sup_{x\in I} g(x) < 0\\
+0 & \text{if } \inf_{x\in I} g(x) < 0 < \sup_{x \in I} g(x).\\
+\end{cases}
+$$
+Therefore,
+$$
+\begin{aligned}
+\sup_{x\in I} g^2(x) - \inf_{x\in I} g^2(x)
+&\leq
+\begin{cases}
+\left|\left(\sup_{x\in I} g(x)\right)^2-\left(\inf_{x\in I}g(x)\right)^2\right| \quad \text{or }\\
+\left(\max(\sup_{x\in I}g(x), -\inf_{x\in I}g(x))\right)^2
+\end{cases}\\
+&\leq 2M \left(\sup_{x\in I} g(x) - \inf_{x\in I}g(x)\right)
+\end{aligned}
+$$
+for each case.
+\end{proof}
+\end{lemma}
+
+\begin{lemma}
+$\sup |f(x) - g(x)| - \inf |f(x)-g(x)|
+\leq \sup f(x) - \inf f(x) + \sup g(x) - \inf g(x)$.
+\begin{proof}
+We can prove it by deviding 6 cases, but we can also prove in clever way.
+Consider two bars whose tips are $\inf f(x), \sup f(x)$ and $\inf g(x), \sup g(x)$.
+Then, $\inf |f(x) - g(x)|$ is greater than gap of two bars, and $\sup | f(x) - g(x)|$ is less than sum of the length of two bars and gap.
+Hence, $\sup|f(x)-g(x)| - \inf|f(x)-g(x)| \leq \left(\sup f(x) - \inf f(x)\right) +\left( \sup g(x) - \inf g(x)\right)$.
+\end{proof}
+\end{lemma}
+
+
+Fix $\epsilon > 0$ and find $N \in \mathbb{N}$ such that $n > N \Rightarrow \int_0^{2\pi} |f_n - f|^2 dx < \epsilon$.\\
+By definition of Riemann integrable, let $P$ be a partition such that $U(f, P) - L(f, P) < \epsilon/8M$.
+Since $P$ is finite, there exists $N \in \mathbb{N}$ such that $P_N = \{ x^N_k : 0 \leq k \leq N\}$ is a subpartition of $P$.
+Let $f$ be bounded by $M > 0$.
+Then,
+$$
+\begin{aligned}
+&\sup_{x \in [x^N_{k-1}, x^N_k]} |f(x) - f_N(x)|^2 - \inf_{x \in [x^N_{k-1}, x^N_k]} |f(x) - f_N(x)|^2\\
+&\leq 4M \left(\sup_{x\in [x^N_{k-1}, x^N_k]} |f(x) - f_N(x)| - \inf_{x\in [x^N_{k-1}, x^N_k]} |f(x) - f_N(x)|\right)\\
+&\leq 4M \left(\sup_{x\in [x^N_{k-1}, x^N_k]} f(x) - \inf_{x\in [x^N_{k-1}, x^N_k]}f(x) + \sup_{x\in [x^N_{k-1}, x^N_k]} f_N(x) - \inf_{x\in [x^N_{k-1}, x^N_k]}f_N(x)  \right)\\
+&\leq 4M \left(\sup_{x\in [x^N_{k-1}, x^N_k]} f(x) - \inf_{x\in [x^N_{k-1}, x^N_k]}f(x) + |f(x^N_k) - f(x^N_{k-1})|\right)\\
+&\leq 8M \left(\sup_{x\in [x^N_{k-1}, x^N_k]} f(x) - \inf_{x\in [x^N_{k-1}, x^N_k]}f(x)\right).
+\end{aligned}
+$$
+Therefore, $\int_0^{2\pi} |f(x) - f_N(x)|^2 dx < \epsilon$.
+Therefore, $\lim_{n\rightarrow\infty} \int_0^{2\pi} |f(x) - f_N(x)|^2dx < \epsilon$.
+\end{proof}
+
+\end{enumerate}
+\end{document}
